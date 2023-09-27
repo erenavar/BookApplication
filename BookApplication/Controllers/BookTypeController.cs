@@ -16,7 +16,7 @@ namespace BookApplication.Controllers
         public IActionResult Index()
         {
             List<BookType> objBookTypeList = _applicationDbContext.BookTypes.ToList();
-            return View();
+            return View(objBookTypeList);
         }
     }
 }
