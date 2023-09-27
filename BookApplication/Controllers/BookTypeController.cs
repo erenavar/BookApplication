@@ -18,5 +18,11 @@ namespace BookApplication.Controllers
             List<BookType> objBookTypeList = _applicationDbContext.BookTypes.ToList();
             return View(objBookTypeList);
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+        
     }
 }
