@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookApplication.Models
 {
@@ -6,7 +7,9 @@ namespace BookApplication.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
+//        [DisplayName("Book Type Name")]
         public string Name { get; set; }
     }
 }
