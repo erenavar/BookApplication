@@ -14,6 +14,8 @@
     <tr>
         <th>Id</th>
         <th>Book Type</th>
+            <th></th>
+            <th></th>
     </tr>
 
     </thead>
@@ -22,6 +24,26 @@
             <tr>
                 <td>@bookType.Id</td>
                 <td>@bookType.Name</td>
+                <td>
+                <a 
+                    asp-controller="BookType" 
+                    asp-action="Edit"
+                    asp-route-id="@bookType.Id"
+                    type="button" 
+                    class="btn btn-success"
+                    style="width:250px"
+                >Edit
+                </a>
+                </td>
+                <td>
+                    <a asp-controller="BookType"
+                       asp-action="Delete"
+                       type="button"
+                       class="btn btn-danger"
+                       style="width:250px">
+                       Delete
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
