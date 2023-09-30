@@ -38,6 +38,7 @@
                 <td>
                     <a asp-controller="BookType"
                        asp-action="Delete"
+                       asp-route-id="@bookType.Id"
                        type="button"
                        class="btn btn-danger"
                        style="width:250px">
@@ -51,6 +52,6 @@
 </table>
 <div class="row pt-3 pb-2">
     <div>
-        <a asp-controller="BookType" asp-action="Add" class="btn btn-lg btn-primary" type="button">Create New Bookt Type</a>
+        <a asp-controller="BookType" asp-action="Add" class="btn btn-lg btn-primary" type="button">Create New Book Type</a>
     </div>
 </div>

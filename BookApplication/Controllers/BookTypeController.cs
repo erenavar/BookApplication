@@ -59,5 +59,19 @@ namespace BookApplication.Controllers
             return View();
         }
 
+
+        public IActionResult Delete(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound();
+            }
+            BookType? bookTypeDb = _applicationDbContext.BookTypes.Find(id);
+            if(bookTypeDb == null)
+            {
+                return NotFound();
+            }
+            return View(bookTypeDb);
+        }
     }
 }
