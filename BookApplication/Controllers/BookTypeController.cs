@@ -34,7 +34,7 @@ namespace BookApplication.Controllers
             return View();
         }
 
-        public IActionResult Update(int? id)
+        public IActionResult Edit(int? id)
         {
             if(id == null || id == 0)
             {
@@ -48,11 +48,11 @@ namespace BookApplication.Controllers
             return View(bookTypeDb);
         }
         [HttpPost]
-        public IActionResult Update(BookType bookType)
+        public IActionResult Edit(BookType bookType)
         {
             if (ModelState.IsValid)
             {
-                _applicationDbContext.BookTypes.Add(bookType);
+                _applicationDbContext.BookTypes.Update(bookType);
                 _applicationDbContext.SaveChanges();
                 return RedirectToAction("Index", "BookType");
             }
