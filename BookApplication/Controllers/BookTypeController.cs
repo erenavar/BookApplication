@@ -73,5 +73,17 @@ namespace BookApplication.Controllers
             }
             return View(bookTypeDb);
         }
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            BookType? bookType = _applicationDbContext.BookTypes.Find(id);
+            if(bookType == null)
+            {
+                return NotFound();
+            }
+            _applicationDbContext.BookTypes.Remove(bookType);
+            _applicationDbContext.SaveChanges();
+            return RedirectToAction("Index", "BookType");
+        }
     }
 }
