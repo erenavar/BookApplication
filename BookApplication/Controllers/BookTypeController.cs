@@ -29,6 +29,7 @@ namespace BookApplication.Controllers
             if (ModelState.IsValid) { 
             _applicationDbContext.BookTypes.Add(bookType);
             _applicationDbContext.SaveChanges();
+            TempData["Successful"] = "The new book type created successfully.";
             return RedirectToAction("Index","BookType");
             }
             return View();
@@ -54,6 +55,8 @@ namespace BookApplication.Controllers
             {
                 _applicationDbContext.BookTypes.Update(bookType);
                 _applicationDbContext.SaveChanges();
+                TempData["Successful"] = "The new book type edit successfully.";
+
                 return RedirectToAction("Index", "BookType");
             }
             return View();
@@ -83,6 +86,8 @@ namespace BookApplication.Controllers
             }
             _applicationDbContext.BookTypes.Remove(bookType);
             _applicationDbContext.SaveChanges();
+            TempData["Successful"] = "The book type deleted successfully.";
+
             return RedirectToAction("Index", "BookType");
         }
     }
