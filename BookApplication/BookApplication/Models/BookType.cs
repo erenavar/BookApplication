@@ -12,5 +12,6 @@ namespace BookApplication.Models
         [MaxLength(30)]
         [DisplayName("Book Type Name")]
         public string Name { get; set; }
+        public int MyProperty { get; set; }
     }
 }
