@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BookApplication"
+    "\\BookApplication",
+    "\\BookApplication\\BookApplication",
+    "\\BookApplication\\BookApplication\\Models"
   ],
-  "SelectedNode": "\\BookApplication\\BookApplication.sln",
+  "SelectedNode": "\\BookApplication\\BookApplication\\Models\\IRepository.cs",
   "PreviewInSolutionExplorer": false
 }

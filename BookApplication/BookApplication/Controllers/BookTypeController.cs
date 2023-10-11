@@ -7,15 +7,15 @@ namespace BookApplication.Controllers
     public class BookTypeController : Controller
     {
 
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IBookTypeRepository _bookTypeRepository;
 
-        public BookTypeController(ApplicationDbContext context)
+        public BookTypeController(IBookTypeRepository context)
         {
-            _applicationDbContext = context;
+            _bookTypeRepository = context;
         }
         public IActionResult Index()
         {
-            List<BookType> objBookTypeList = _applicationDbContext.BookTypes.ToList();
+            List<BookType> objBookTypeList = _bookTypeRepository.GetAll().ToList();
             return View(objBookTypeList);
         }
 
@@ -28,8 +28,8 @@ namespace BookApplication.Controllers
         {
             if (ModelState.IsValid) 
                 { 
-            _applicationDbContext.BookTypes.Add(bookType);
-            _applicationDbContext.SaveChanges();
+            _bookTypeRepository.Add(bookType);
+            _bookTypeRepository.Save();
             TempData["successful"] = "The new book type created successfully.";
             return RedirectToAction("Index","BookType");
             }
@@ -42,7 +42,7 @@ namespace BookApplication.Controllers
             {
                 return NotFound();
             }
-            BookType? bookTypeDb = _applicationDbContext.BookTypes.Find(id);
+            BookType? bookTypeDb = _bookTypeRepository.Get(i => i.Id == id);
             if(bookTypeDb == null)
             {
                 return NotFound();
@@ -54,8 +54,8 @@ namespace BookApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                _applicationDbContext.BookTypes.Update(bookType);
-                _applicationDbContext.SaveChanges();
+                _bookTypeRepository.Update(bookType);
+                _bookTypeRepository.Save();
                 TempData["successful"] = "The new book type edit successfully.";
 
                 return RedirectToAction("Index", "BookType");
@@ -70,7 +70,7 @@ namespace BookApplication.Controllers
             {
                 return NotFound();
             }
-            BookType? bookTypeDb = _applicationDbContext.BookTypes.Find(id);
+            BookType? bookTypeDb = _bookTypeRepository.Get(i => i.Id == id);
             if(bookTypeDb == null)
             {
                 return NotFound();
@@ -80,13 +80,13 @@ namespace BookApplication.Controllers
         [HttpPost,ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            BookType? bookType = _applicationDbContext.BookTypes.Find(id);
+            BookType? bookType = _bookTypeRepository.Get(i => i.Id == id);
             if(bookType == null)
             {
                 return NotFound();
             }
-            _applicationDbContext.BookTypes.Remove(bookType);
-            _applicationDbContext.SaveChanges();
+            _bookTypeRepository.Remove(bookType);
+            _bookTypeRepository.Save();
             TempData["successful"] = "The book type deleted successfully.";
 
             return RedirectToAction("Index", "BookType");

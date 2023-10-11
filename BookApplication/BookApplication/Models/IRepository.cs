@@ -2,12 +2,14 @@
 
 namespace BookApplication.Models
 {
-    public interface IRepository<T> where T :class
+    public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
-        T Get(Expression<Func<T, bool>> filtre);
+        T Get(Expression<Func<T, bool>> filter);
         void Add(T entity);
-        void Delete(T entity);
-        void DeleteRange(IEnumerable<T> entities);
+        void Remove(T entity);
+        void RemoveFill(IEnumerable<T> entities);
+
+
     }
 }

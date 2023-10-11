@@ -1,3 +1,4 @@
+using BookApplication.Models;
 using BookApplication.Utility;
 using Microsoft.EntityFrameworkCore;
 
@@ -5,8 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Created _bookTypeRepository
+builder.Services.AddScoped<IBookTypeRepository, BookTypeRepository>();
 
 var app = builder.Build();
 
