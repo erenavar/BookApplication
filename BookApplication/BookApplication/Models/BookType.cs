@@ -8,9 +8,6 @@ namespace BookApplication.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="This is not a default message.")]
-        [MaxLength(30)]
-        [DisplayName("Book Type Name")]
         public string Name { get; set; }
      
     }
