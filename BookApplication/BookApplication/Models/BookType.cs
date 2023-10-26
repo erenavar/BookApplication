@@ -8,6 +8,10 @@ namespace BookApplication.Models
         [Key]
         public int Id { get; set; }
 
+        [Required(ErrorMessage ="This field can't be empty")]
+        [MaxLength(25)]
+        [DisplayName("Book Type Name")]
+
         public string Name { get; set; }
      
     }

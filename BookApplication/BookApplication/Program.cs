@@ -13,6 +13,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //Created _bookTypeRepository
 builder.Services.AddScoped<IBookTypeRepository, BookTypeRepository>();
 
+
+//// Created _bookRepository
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
