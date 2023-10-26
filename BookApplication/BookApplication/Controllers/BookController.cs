@@ -1,6 +1,7 @@
 ﻿using BookApplication.Models;
 using BookApplication.Utility;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookApplication.Controllers
 {
@@ -8,19 +9,28 @@ namespace BookApplication.Controllers
     {
 
         private readonly IBookRepository _bookRepository;
+        private readonly IBookTypeRepository _bookTypeRepository;
 
-        public BookController(IBookRepository context)
+        public BookController(IBookRepository bookRepository, IBookTypeRepository bookTypeRepository)
         {
-            _bookRepository = context;
+            _bookRepository = bookRepository;
+            _bookTypeRepository = bookTypeRepository;
         }
         public IActionResult Index()
         {
             List<Book> objBookList = _bookRepository.GetAll().ToList();
+          
             return View(objBookList);
         }
 
         public IActionResult Add()
         {
+            IEnumerable<SelectListItem> BookTypeList = _bookTypeRepository.GetAll().Select(t => new SelectListItem
+            {
+                Text = t.Name,
+                Value = t.Id.ToString()
+            });
+            ViewBag.BookTypeList = BookTypeList;
             return View();
         }
         [HttpPost]
