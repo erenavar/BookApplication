@@ -39,7 +39,7 @@
                 <td>
                 <a 
                     asp-controller="Book" 
-                    asp-action="Edit"
+                    asp-action="AddEdit"
                     asp-route-id="@book.Id"
                     type="button" 
                     class="btn btn-success"
@@ -64,6 +64,6 @@
 </table>
 <div class="row pt-3 pb-2">
     <div>
-        <a asp-controller="Book" asp-action="Add" class="btn btn-lg btn-primary" type="button">Create New Book</a>
+        <a asp-controller="Book" asp-action="AddEdit" class="btn btn-lg btn-primary" type="button">Create New Book</a>
     </div>
 </div>

@@ -23,7 +23,7 @@ namespace BookApplication.Controllers
             return View(objBookList);
         }
 
-        public IActionResult Add()
+        public IActionResult AddEdit(int? id)
         {
             IEnumerable<SelectListItem> BookTypeList = _bookTypeRepository.GetAll().Select(t => new SelectListItem
             {
@@ -31,10 +31,22 @@ namespace BookApplication.Controllers
                 Value = t.Id.ToString()
             });
             ViewBag.BookTypeList = BookTypeList;
-            return View();
+            if(id == 0 || id == null)
+            {
+                return View();
+            }else
+            {
+                Book? bookDb = _bookRepository.Get(i => i.Id == id);
+                if (bookDb == null)
+                {
+                    return NotFound();
+                }
+                return View(bookDb);
+            }
+
         }
         [HttpPost]
-        public IActionResult Add(Book book)
+        public IActionResult AddEdit(Book book,IFormFile? file)
         {
             if (ModelState.IsValid) 
                 { 
@@ -46,20 +58,21 @@ namespace BookApplication.Controllers
             return View();
         }
 
-        public IActionResult Edit(int? id)
+      /*  public IActionResult Edit(int? id)
         {
             if(id == null || id == 0)
             {
                 return NotFound();
             }
             Book? bookDb = _bookRepository.Get(i => i.Id == id);
-            if(bookDb == null)
+            if (bookDb == null)
             {
                 return NotFound();
             }
             return View(bookDb);
-        }
-        [HttpPost]
+
+        }*/
+        /*[HttpPost]
         public IActionResult Edit(Book book)
         {
             if (ModelState.IsValid)
@@ -71,7 +84,7 @@ namespace BookApplication.Controllers
                 return RedirectToAction("Index", "Book");
             }
             return View();
-        }
+        }*/
 
 
         public IActionResult Delete(int? id)
