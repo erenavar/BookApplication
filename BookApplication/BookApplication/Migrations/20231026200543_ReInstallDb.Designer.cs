@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231025124925_1001_FirstCheckIn")]
-    partial class _1001_FirstCheckIn
+    [Migration("20231026200543_ReInstallDb")]
+    partial class ReInstallDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace BookApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BookTypeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Definition")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -44,10 +47,16 @@ namespace BookApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PicUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookTypeId");
 
                     b.ToTable("Books");
                 });
@@ -62,11 +71,23 @@ namespace BookApplication.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
                     b.ToTable("BookTypes");
+                });
+
+            modelBuilder.Entity("BookApplication.Models.Book", b =>
+                {
+                    b.HasOne("BookApplication.Models.BookType", "BookType")
+                        .WithMany()
+                        .HasForeignKey("BookTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BookType");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,7 +16,7 @@
         <div class="mb-3">
             <label asp-for="BookTypeId" class="p-0"></label>
             <select asp-for="BookTypeId" asp-items="ViewBag.BookTypeList" class="form-select"></select>
-            <span asp-validation-for="BookTypeId" class="text-danger"></span>
+ 
         </div>
 
         <div class="mb-3">
@@ -40,7 +40,7 @@
         </div>
         <div class="mb-3">
             <label asp-for="PicUrl" class="p-0"></label>
-            <input type="file" class="form-control" />
+            <input type="file" name="file" class="form-control" />
         </div>
 
         @if (Model != null)

@@ -10,11 +10,13 @@ namespace BookApplication.Controllers
 
         private readonly IBookRepository _bookRepository;
         private readonly IBookTypeRepository _bookTypeRepository;
+        public readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BookController(IBookRepository bookRepository, IBookTypeRepository bookTypeRepository)
+        public BookController(IBookRepository bookRepository, IBookTypeRepository bookTypeRepository,IWebHostEnvironment webHostEnvironment)
         {
             _bookRepository = bookRepository;
             _bookTypeRepository = bookTypeRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -49,42 +51,22 @@ namespace BookApplication.Controllers
         public IActionResult AddEdit(Book book,IFormFile? file)
         {
             if (ModelState.IsValid) 
-                { 
-            _bookRepository.Add(book);
-            _bookRepository.Save();
-            TempData["successful"] = "The new book created successfully.";
-            return RedirectToAction("Index","Book");
+            {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string bookPath = Path.Combine(wwwRootPath, @"img");
+                using (var fileStream = new FileStream(Path.Combine(bookPath, file.FileName), FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                book.PicUrl = @"\img\" + file.FileName;
+
+                _bookRepository.Add(book);
+                _bookRepository.Save();
+                 TempData["successful"] = "The new book created successfully.";
+                return RedirectToAction("Index","Book");
             }
             return View();
         }
-
-      /*  public IActionResult Edit(int? id)
-        {
-            if(id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Book? bookDb = _bookRepository.Get(i => i.Id == id);
-            if (bookDb == null)
-            {
-                return NotFound();
-            }
-            return View(bookDb);
-
-        }*/
-        /*[HttpPost]
-        public IActionResult Edit(Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                _bookRepository.Update(book);
-                _bookRepository.Save();
-                TempData["successful"] = "The new book edit successfully.";
-
-                return RedirectToAction("Index", "Book");
-            }
-            return View();
-        }*/
 
 
         public IActionResult Delete(int? id)
