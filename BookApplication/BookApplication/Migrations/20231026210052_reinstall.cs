@@ -5,7 +5,7 @@
 namespace BookApplication.Migrations
 {
     /// <inheritdoc />
-    public partial class ReInstallDb : Migration
+    public partial class reinstall : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231026200543_ReInstallDb")]
-    partial class ReInstallDb
+    [Migration("20231026210052_reinstall")]
+    partial class reinstall
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

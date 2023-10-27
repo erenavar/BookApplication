@@ -60,9 +60,17 @@ namespace BookApplication.Controllers
                 }
                 book.PicUrl = @"\img\" + file.FileName;
 
+                if(book.Id == 0)
+                {
                 _bookRepository.Add(book);
-                _bookRepository.Save();
                  TempData["successful"] = "The new book created successfully.";
+                } else
+                {
+                    _bookRepository.Update(book);
+                    TempData["successful"] = "The book was updated successfully.";
+                }
+
+                _bookRepository.Save();
                 return RedirectToAction("Index","Book");
             }
             return View();
