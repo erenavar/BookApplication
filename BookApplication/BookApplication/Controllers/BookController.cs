@@ -20,8 +20,8 @@ namespace BookApplication.Controllers
         }
         public IActionResult Index()
         {
-            List<Book> objBookList = _bookRepository.GetAll().ToList();
-          
+            
+            List<Book> objBookList = _bookRepository.GetAll(includeProps:"BookType").ToList();       
             return View(objBookList);
         }
 
@@ -54,11 +54,14 @@ namespace BookApplication.Controllers
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 string bookPath = Path.Combine(wwwRootPath, @"img");
-                using (var fileStream = new FileStream(Path.Combine(bookPath, file.FileName), FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
+                if(file != null) 
+                { 
+                    using (var fileStream = new FileStream(Path.Combine(bookPath, file.FileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
                 book.PicUrl = @"\img\" + file.FileName;
+                }
 
                 if(book.Id == 0)
                 {
