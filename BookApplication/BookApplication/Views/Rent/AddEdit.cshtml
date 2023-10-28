@@ -5,42 +5,50 @@
 
     <div class="row">
 
-
-                 
-                <div class="border p-3 m-5">
-            <div class="row pb-3">
+        <div class="col-10">
+            <div class="border p-3 m-5">
+                <div class="row pb-3">
                     <h2 class="text-primary">@(Model == null ? "Rent" : "Update Rent")</h2>
-                <hr />
-            </div>
-            <div class="mb-3">
-                <label asp-for="StudentId" class="p-0"></label>
-                <input asp-for="StudentId" class="form-control" />
-                <span asp-validation-for="StudentId" class="text-danger"></span>
-            </div>
+                    <hr />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="StudentId" class="p-0"></label>
+                    <input asp-for="StudentId" class="form-control" />
+                    <span asp-validation-for="StudentId" class="text-danger"></span>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="BookId" class="p-0"></label>
-                <select asp-for="BookId" asp-items="ViewBag.BookList" class="form-select"></select>
- 
+                <div class="mb-3">
+                    <label asp-for="BookId" class="p-0"></label>
+                    <select asp-for="BookId" asp-items="ViewBag.BookList" class="form-select"></select>
+
+                </div>
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:200px">Edit</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:200px">New Rent</button>
+
+                }
+
+                <a asp-controller="Rent" asp-action="Index"
+                   class="btn btn-lg btn-primary"
+                   style="width:200px">
+                    Back to Rents
+                </a>
             </div>
-
-
-            @if (Model != null)
+        </div>
+    
+        <div class="col-2">
+            @if(Model != null)
             {
-                <button type="submit" class="btn btn-lg btn-primary" style="width:200px">Edit</button>
-            }else
-            {
-                <button type="submit" class="btn btn-lg btn-primary" style="width:200px">New Rent</button>
-            
+                <br />
+                <br />
+                <img src="@Model.Book.PicUrl" width="100%" style="border-radius = 7px; border=1px solid #bbb9b9" />
             }
 
-            <a asp-controller="Rent" asp-action="Index" 
-                class="btn btn-lg btn-primary" 
-                style="width:200px">
-                Back to Rents</a>
         </div>
-
-      
 
     </div>
 

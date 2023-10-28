@@ -14,6 +14,12 @@
    
         </div>
 
+        <div class="mb-3">
+            <label asp-for="BookId" class="p-0"></label>
+            <select asp-for="BookId" asp-items="ViewBag.BookList" class="form-select" disabled></select>
+
+        </div>
+
        
         <button type="submit" class="btn btn-lg btn-primary" style="width:200px">Delete Record</button>
         <a asp-controller="Rent" asp-action="Index"

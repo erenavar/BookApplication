@@ -74,7 +74,15 @@ namespace BookApplication.Controllers
 
         public IActionResult Delete(int? id)
         {
-            if(id == null || id == 0)
+            IEnumerable<SelectListItem> BookList = _bookRepository.GetAll().Select(t => new SelectListItem
+            {
+                Text = t.Name,
+                Value = t.Id.ToString()
+            });
+            ViewBag.BookList = BookList;
+
+
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
