@@ -13,6 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //Created _bookTypeRepository
 builder.Services.AddScoped<IBookTypeRepository, BookTypeRepository>();
 
+//Created _bookTypeRepository
+builder.Services.AddScoped<IRentRepository, RentRepository>();
 
 //// Created _bookRepository
 builder.Services.AddScoped<IBookRepository, BookRepository>();
