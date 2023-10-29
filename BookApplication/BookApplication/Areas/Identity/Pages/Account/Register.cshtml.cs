@@ -98,6 +98,13 @@ namespace BookApplication.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public int StudentNo { get; set; }
+            public string? Adress { get; set; }
+
+            public string? Faculty { get; set; }
+            public string? Department { get; set; }
         }
 
 
@@ -117,6 +124,13 @@ namespace BookApplication.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.StudentNo = Input.StudentNo;
+                user.Adress = Input.Adress;
+                user.Faculty = Input.Faculty;
+                user.Department = Input.Department;
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
