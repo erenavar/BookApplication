@@ -1,9 +1,12 @@
 ﻿using BookApplication.Models;
 using BookApplication.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookApplication.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]
+
     public class BookTypeController : Controller
     {
 

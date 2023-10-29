@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BookApplication.Utility;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link text" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+
+                        @if(User.IsInRole(UserRoles.Role_Admin)){
                         <li class="nav-item">
                             <a class="nav-link text" asp-area="" asp-controller="BookType" asp-action="Index">Book Type</a>
                         </li>
@@ -34,6 +38,7 @@
                         <li class="nav-item">
                             <a class="nav-link text" asp-area="" asp-controller="Rent" asp-action="Index">Rent</a>
                         </li>
+                        }
                     </ul>
 
                     <partial name="_LoginPartial" />
