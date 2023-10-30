@@ -23,9 +23,12 @@
                         <li class="nav-item">
                             <a class="nav-link text" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+                        @if(User.IsInRole(UserRoles.Role_Student)){
                         <li class="nav-item">
-                            <a class="nav-link text" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text" asp-area="" asp-controller="Book" asp-action="Index">Book List</a>
                         </li>
+                        }
 
 
                         @if(User.IsInRole(UserRoles.Role_Admin)){
@@ -33,12 +36,16 @@
                             <a class="nav-link text" asp-area="" asp-controller="BookType" asp-action="Index">Book Type</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text" asp-area="" asp-controller="Book" asp-action="Index">Book</a>
+                            <a class="nav-link text" asp-area="" asp-controller="Book" asp-action="Index">Book Operations</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text" asp-area="" asp-controller="Rent" asp-action="Index">Rent</a>
                         </li>
                         }
+
+                        <li class="nav-item">
+                            <a class="nav-link text" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
                     </ul>
 
                     <partial name="_LoginPartial" />
@@ -55,7 +62,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - BookApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; Online Library - <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

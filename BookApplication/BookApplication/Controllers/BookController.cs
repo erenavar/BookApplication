@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookApplication.Controllers
 {
-    [Authorize(Roles = UserRoles.Role_Admin)]
+   
     public class BookController : Controller
     {
 
@@ -20,6 +20,8 @@ namespace BookApplication.Controllers
             _bookTypeRepository = bookTypeRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [Authorize(Roles = "Admin,Student")]
         public IActionResult Index()
         {
             
@@ -27,6 +29,7 @@ namespace BookApplication.Controllers
             return View(objBookList);
         }
 
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult AddEdit(int? id)
         {
             IEnumerable<SelectListItem> BookTypeList = _bookTypeRepository.GetAll().Select(t => new SelectListItem
@@ -50,6 +53,7 @@ namespace BookApplication.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult AddEdit(Book book,IFormFile? file)
         {
             if (ModelState.IsValid) 
@@ -81,7 +85,7 @@ namespace BookApplication.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult Delete(int? id)
         {
             if(id == null || id == 0)
@@ -96,6 +100,7 @@ namespace BookApplication.Controllers
             return View(bookDb);
         }
         [HttpPost,ActionName("Delete")]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult DeletePOST(int? id)
         {
             Book? book = _bookRepository.Get(i => i.Id == id);
